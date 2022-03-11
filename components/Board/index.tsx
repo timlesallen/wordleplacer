@@ -89,11 +89,11 @@ function gameBoard({ board }: BoardProps) {
       <Header>WORDLEPLACER</Header>
       <Board>
         <BoardTileContainer>
-          {board.map((row) => (
-            <Row key={row}>
-              {row.map((col) => (
-                <BoardTileWrapper>
-                  <BoardTile color ="white" letter="" key={col}></BoardTile>
+          {board.map((row, rowIndex) => (
+            <Row key={rowIndex}>
+              {row.map((segment, colIndex) => (
+                <BoardTileWrapper key={colIndex}>
+                  <BoardTile color ="white" letter={segment.letter}></BoardTile>
                 </BoardTileWrapper>
                 
               ))}
