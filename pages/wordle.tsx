@@ -41,9 +41,13 @@ function debugState (state: State) {
   console.log(boardFromState(state));
 }
 
+function randomWord () {
+  return 'pause';
+}
+
 const Home: NextPage = () => {
   // FIXME wordToGuess selected from list...
-  const [state, setState] = useState<State>({ wordToGuess: 'pause', guessesSoFar: [], currentGuess: '' });
+  const [state, setState] = useState<State>({ wordToGuess: randomWord(), guessesSoFar: [], currentGuess: '' });
   var board: BoardType = emptyBoard();
 
   const onKeyPress = (key: string) => {
