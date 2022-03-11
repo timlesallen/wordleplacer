@@ -17,10 +17,13 @@ interface State {
 
 function boardFromState (state: State) {
   const board = emptyBoard();
+  const { wordToGuess } = state;
   state.guessesSoFar.forEach((guess: string, row: number) => {
     var col = 0;
     for (let c of guess) {
       board[row][col].letter = c;
+      if (c === wordToGuess[col]) board[row][col].color = 'green';
+      else if (wordToGuess.includes(c)) board[row][col].color = 'orange';
       col++;
     }
   });
