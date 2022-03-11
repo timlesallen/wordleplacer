@@ -17,16 +17,26 @@ interface State {
 
 function boardFromState (state: State) {
   const board = emptyBoard();
-  const { wordToGuess } = state;
-  state.guessesSoFar.forEach((guess: string, row: number) => {
-    var col = 0;
+  const { wordToGuess, guessesSoFar, currentGuess } = state;
+  guessesSoFar.forEach((guess: string, row: number) => {
+    let col = 0;
     for (let c of guess) {
       board[row][col].letter = c;
+      // set green color if letter is in the right place
       if (c === wordToGuess[col]) board[row][col].color = 'green';
+      // set orange if the letter is in the word, but not the right place
       else if (wordToGuess.includes(c)) board[row][col].color = 'orange';
       col++;
     }
   });
+
+  const rowForPartialGuess = guessesSoFar.length;
+  let col = 0;
+  for (let c of currentGuess) {
+    board[rowForPartialGuess][col].letter = c;
+    col++;
+  }
+
   return board;
 }
 
