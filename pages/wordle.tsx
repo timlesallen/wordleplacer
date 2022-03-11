@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Board></Board>
-      <Keyboard></Keyboard>
+      <Keyboard onKeyPress={press => console.log('press:', press)}></Keyboard>
     </div>
   )
 }
