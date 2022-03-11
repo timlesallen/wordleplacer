@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Keyboard from '../components/Keyboard'
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 
 const BOARD_WIDTH = 5;
 const MAX_GUESSES = 6;
@@ -87,13 +87,13 @@ const Home: NextPage<HomeProps> = ({ randomWord }) => {
   )
 }
 
-Home.getInitialProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const protocol = req.headers['x-forwarded-proto'] || 'http'
   const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
 
   const res = await fetch(baseUrl + '/api/random-word')
-  const json = await res.json()
-  return { randomWord: json.word };
+  const json = await res.json();
+  return { props: { randomWord: json.word } };
 }
 
 export default Home
