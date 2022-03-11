@@ -1,16 +1,17 @@
 import styled from "styled-components";
-export type BoardSegment = { letter: string, color: string }
-export type BoardType = BoardSegment[][]
+// export type GameBoard = BoardTile[][]
+export type BoardType = BoardTile[][]
+
 export interface BoardProps {
   board: BoardType
-  // gameBoard: Function
+  // tiles: BoardTile[]
+  // onKeyPress: Function
 }
 
-export interface BoardSegmentProps {
+export interface BoardTile {
   letter: string
   color: string
 }
-
 
 const Main = styled.main`
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
@@ -46,24 +47,7 @@ const Board = styled.section`
   flex-grow: 1;
 `;
 
-const BoardSegmentContainer = styled.div`
-  display: grid;
-  grid-template-rows: repeat(6, 1fr);
-  grid-gap: 5px;
-
-  height: 420px;
-  width: 350px;
-`;
-
-const BoardSegmentRow = styled.div`
-  width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 5px;
-`;
-
-const BoardSegment = styled.div`
+const BoardTileWrapper = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -75,20 +59,47 @@ const BoardSegment = styled.div`
   text-transform: uppercase;
 `;
 
-function gameBoard() {
+
+const BoardTileContainer = styled.div`
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 5px;
+
+  height: 420px;
+  width: 350px;
+`;
+
+const Row = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+`;
+
+const BoardTile = ({ letter, color }: BoardTile) => {
+  return (
+    <span>{ letter }</span>
+  );
+}
+
+function gameBoard({ board }: BoardProps) {
   return (
     <Main>
       <Header>WORDLEPLACER</Header>
       <Board>
-        <BoardSegmentContainer>
-          {[0, 1, 2, 3, 4, 5].map((i) => (
-            <BoardSegmentRow key={i}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <BoardSegment key={i}></BoardSegment>
+        <BoardTileContainer>
+          {board.map((row) => (
+            <Row key={row}>
+              {row.map((col) => (
+                <BoardTileWrapper>
+                  <BoardTile color ="white" letter="" key={col}></BoardTile>
+                </BoardTileWrapper>
+                
               ))}
-            </BoardSegmentRow>
+            </Row>
           ))}
-        </BoardSegmentContainer>
+        </BoardTileContainer>
       </Board>
     </Main>
   );
@@ -96,6 +107,9 @@ function gameBoard() {
 
 export default gameBoard
 
+// export default () => {
+//   return board();
+// }
 
 // const Board = ({ board }: BoardProps) => {
 //   // thing1

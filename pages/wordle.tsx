@@ -1,5 +1,5 @@
-import Board from '../components/Board'
-import { BoardType } from '../components/Board'
+import Board, { BoardType } from '../components/Board'
+// import BoardType from '../components/Board';
 import Head from 'next/head'
 import Image from 'next/image'
 import Keyboard from '../components/Keyboard'
