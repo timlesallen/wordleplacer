@@ -1,4 +1,11 @@
-// Note, need to grey it out when they have guessed.
-const Keyboard = ({ onClick: function }) => (<p>keyboard</p>)
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
 
-export default Keyboard
+// Note, need to grey it out when they have guessed.
+export interface KeyboardProps {
+  onKeyPress: Function
+}
+
+export default ({ onKeyPress }: KeyboardProps) => {
+  return Keyboard({ onKeyPress });
+}
