@@ -49,6 +49,7 @@ const Home: NextPage = () => {
   const onKeyPress = (key: string) => {
     const { wordToGuess, guessesSoFar, currentGuess } = state;
 
+    if (state.currentGuess.length >= BOARD_WIDTH) return;
     if (key === '{enter}') {
       return setState({wordToGuess, guessesSoFar: guessesSoFar.concat(currentGuess), currentGuess: '' });
     }
