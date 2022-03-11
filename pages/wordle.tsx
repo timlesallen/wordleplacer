@@ -49,9 +49,13 @@ const Home: NextPage = () => {
   const onKeyPress = (key: string) => {
     const { wordToGuess, guessesSoFar, currentGuess } = state;
 
-    if (state.currentGuess.length >= BOARD_WIDTH) return;
-    if (key === '{enter}') {
-      return setState({wordToGuess, guessesSoFar: guessesSoFar.concat(currentGuess), currentGuess: '' });
+    if (currentGuess.length >= BOARD_WIDTH) return;
+    switch(key) {
+      case '{enter}':
+        return setState({wordToGuess, guessesSoFar: guessesSoFar.concat(currentGuess), currentGuess: '' });
+      case '{bksp}':
+        if (currentGuess.length === 0) return;
+        return setState({wordToGuess, guessesSoFar: guessesSoFar, currentGuess: currentGuess.slice(0,-1) });
     }
     setState({wordToGuess, guessesSoFar, currentGuess: currentGuess + key })
   }
