@@ -65,6 +65,7 @@ const Home: NextPage<HomeProps> = ({ randomWord }) => {
 
     switch(key) {
       case '{enter}':
+        if (currentGuess.length < BOARD_WIDTH) return;
         return setState({wordToGuess, guessesSoFar: guessesSoFar.concat(currentGuess), currentGuess: '' });
       case '{bksp}':
         if (currentGuess.length === 0) return;
