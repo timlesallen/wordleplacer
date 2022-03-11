@@ -41,11 +41,6 @@ function debugState (state: State) {
   console.log(boardFromState(state));
 }
 
-function randomWord () {
-  return 'pause';
-}
-
-
 interface HomeProps {
   randomWord: string
 }
@@ -58,7 +53,6 @@ const Home: NextPage<HomeProps> = ({ randomWord }) => {
   const onKeyPress = (key: string) => {
     const { wordToGuess, guessesSoFar, currentGuess } = state;
 
-    if (currentGuess.length >= BOARD_WIDTH) return;
     switch(key) {
       case '{enter}':
         return setState({wordToGuess, guessesSoFar: guessesSoFar.concat(currentGuess), currentGuess: '' });
@@ -66,6 +60,7 @@ const Home: NextPage<HomeProps> = ({ randomWord }) => {
         if (currentGuess.length === 0) return;
         return setState({wordToGuess, guessesSoFar: guessesSoFar, currentGuess: currentGuess.slice(0,-1) });
     }
+    if (currentGuess.length >= BOARD_WIDTH) return;
     setState({wordToGuess, guessesSoFar, currentGuess: currentGuess + key })
   }
 
