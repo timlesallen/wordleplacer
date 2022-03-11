@@ -54,7 +54,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     debugState(state);
-    board = boardFromState(state);
   });
 
   return (
