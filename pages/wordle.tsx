@@ -45,9 +45,14 @@ function randomWord () {
   return 'pause';
 }
 
-const Home: NextPage = () => {
+
+interface HomeProps {
+  randomWord: string
+}
+
+const Home: NextPage<HomeProps> = ({ randomWord }) => {
   // FIXME wordToGuess selected from list...
-  const [state, setState] = useState<State>({ wordToGuess: randomWord(), guessesSoFar: [], currentGuess: '' });
+  const [state, setState] = useState<State>({ wordToGuess: randomWord, guessesSoFar: [], currentGuess: '' });
   var board: BoardType = emptyBoard();
 
   const onKeyPress = (key: string) => {
@@ -74,6 +79,15 @@ const Home: NextPage = () => {
       <Keyboard onKeyPress={onKeyPress}></Keyboard>
     </div>
   )
+}
+
+Home.getInitialProps = async ({ req }) => {
+  const protocol = req.headers['x-forwarded-proto'] || 'http'
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
+
+  const res = await fetch(baseUrl + '/api/random-word')
+  const json = await res.json()
+  return { randomWord: json.word };
 }
 
 export default Home
