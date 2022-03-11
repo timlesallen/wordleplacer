@@ -47,7 +47,7 @@ const Board = styled.section`
   flex-grow: 1;
 `;
 
-const BoardTileWrapper = styled.div`
+const BoardTileInner = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +57,7 @@ const BoardTileWrapper = styled.div`
   font-weight: bold;
   line-height: 3.2rem;
   text-transform: uppercase;
+  background-color: ${props => props.theme.color}
 `;
 
 
@@ -79,7 +80,7 @@ const Row = styled.div`
 
 const BoardTile = ({ letter, color }: BoardTile) => {
   return (
-    <span>{ letter }</span>
+    <BoardTileInner theme={{color: color}}>{ letter }</BoardTileInner>
   );
 }
 
@@ -92,10 +93,7 @@ function gameBoard({ board }: BoardProps) {
           {board.map((row, rowIndex) => (
             <Row key={rowIndex}>
               {row.map((segment, colIndex) => (
-                <BoardTileWrapper key={colIndex}>
-                  <BoardTile color ="white" letter={segment.letter}></BoardTile>
-                </BoardTileWrapper>
-                
+                <BoardTile key={colIndex} color={segment.color} letter={segment.letter}></BoardTile>
               ))}
             </Row>
           ))}
