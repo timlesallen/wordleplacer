@@ -1,3 +1,17 @@
+# wordleplacer
+
+A simple wordle clone developed in one day during a 'hack day'.  Co-authored with [tiff-o](https://github.com/tiff-o).
+
+You can try it out [here](http://wordleplacer.herokuapp.com/).
+
+## Limitations
+
+- No spell checking (i.e. you can guess words that aren't words).
+- Keyboard doesn't show what you've guessed.
+- I'm sure there are others :)
+
+# Development
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
